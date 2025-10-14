@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BiteWise Prototype</title>
+  </head>
+  <body>
+    <h1>Welcome to BiteWise!</h1>
+    <p>Upload a product photo to get a quick health rating and suggestions.</p>
+    <input type="file" id="photoUpload" accept="image/*">
+    <button onclick="showMessage()">Submit</button>
+    <p id="result"></p>
+
+    <script>
+      function showMessage() {
+        document.getElementById("result").innerText = 
+          "Thanks for uploading! Our AI will analyze your meal soon.";
+      }
+    </script>
+  </body>
+</html>
