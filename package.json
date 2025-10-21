@@ -1,0 +1,13 @@
+{
+  "name": "bitwise-test",
+  "version": "1.0.0",
+  "description": "BiteWise frontend and Jest unit testing setup",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
+
