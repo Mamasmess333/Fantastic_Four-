@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiteWise Prototype</title>
+  </head>
+  <body>
+    <h1>Welcome to BiteWise!</h1>
+    <p>Upload a product photo to get a quick health rating and suggestions.</p>
+    <input type="file" id="photoUpload" accept="image/*">
+    <button onclick="showMessage()">Submit</button>
+    <p id="result"></p>
+
+    <h1 id="sound"></h1>
+    <input id="name" type="text">
+    <button onclick="getSound()">API request</button><br><br>
+
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    
+    <script>
+      function showMessage() {
+        document.getElementById("result").innerText = 
+          "Thanks for uploading! Our AI will analyze your meal soon.";
+      }
+      function getSound() {
+        const name = document.getElementById('name').value
+        fetch(`http://localhost:3000/sound/${name}`)
+          .then((response) => response. json())
+          .then((data) => {
+            console.log(data)
+            document.getElementById('name').innerHTML = data
+          });
+      }
+      const login = async (username, password) => {
+        try {
+          const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            alert('Login successful!');
+            console.log(data);
+            window.location.href = data.redirectUrl;
+          } else {
+            alert(`Login failed: ${data.message}`);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+      document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        login(username, password);
+      });
+    </script>
+  </body>
+</html>
