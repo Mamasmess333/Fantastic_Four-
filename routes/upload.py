@@ -1,18 +1,29 @@
-from fastapi import APIRouter, UploadFile, HTTPException
-from services.s3_service import upload_to_s3
+from fastapi import APIRouter, UploadFile, File, HTTPException
 from services.ai_service import analyze_image
+import os
 
 router = APIRouter(prefix="/upload", tags=["Upload"])
 
 @router.post("")
-async def upload_image(file: UploadFile):
+async def upload_image(file: UploadFile = File(...)):
     try:
-        s3_url = upload_to_s3(file)
-        ai_result = analyze_image(s3_url) 
-        return {
-            "image_url": s3_url,
-            **ai_result
-        }
+        # Save the uploaded image temporarily
+        os.makedirs("temp", exist_ok=True)
+        temp_path = f"temp/{file.filename}"
+        with open(temp_path, "wb") as f:
+            f.write(await file.read())
+
+        # Run AWS Rekognition analysis
+        result = analyze_image(temp_path)
+
+        # Clean up
+        os.remove(temp_path)
+
+        # Return the analysis result
+        if "error" in result:
+            raise HTTPException(status_code=500, detail=result["error"])
+
+        return {"status": "success", "labels": result["labels"]}
+
     except Exception as e:
-        print(e)
-        raise HTTPException(status_code=500, detail="Upload or analysis failed.")
+        raise HTTPException(status_code=500, detail=f"Upload or analysis failed: {str(e)}")
