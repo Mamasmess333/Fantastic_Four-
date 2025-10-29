@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BiteWise AI 🍽️</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #00ff99;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      color: #00ff99;
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #f0f0f0;
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="file"] {
+      background: #1a1a1a;
+      border: 2px solid #00ff99;
+      border-radius: 8px;
+      color: white;
+      padding: 10px;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      background-color: #00ff99;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #00cc7a;
+      transform: scale(1.05);
+    }
+
+    pre {
+      background: #111;
+      color: #00ff99;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 700px;
+      overflow-x: auto;
+      margin-top: 1.5rem;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>BiteWise AI 🍽️</h1>
+  <p>Upload an image of food to analyze it using AWS Rekognition</p>
+
+  <input type="file" id="imageUpload" accept="image/*">
+  <br>
+  <button onclick="uploadImage()">Analyze Image</button>
+
+  <pre id="result">{ "status": "waiting for image..." }</pre>
+
+  <script src="script.js"></script>
+</body>
+</html>
