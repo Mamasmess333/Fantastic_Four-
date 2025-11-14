@@ -1,5 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from services.ai_service import analyze_image
+from services.s3_service import upload_to_s3
 import os
 
 router = APIRouter(prefix="/upload", tags=["Upload"])
