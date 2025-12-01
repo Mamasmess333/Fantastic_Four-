@@ -17,7 +17,11 @@ s3 = boto3.client(
     region_name=S3_REGION
 )
 
-def upload_to_s3(file):
-    file_id = str(uuid4()) + "_" + file.filename
-    s3.upload_fileobj(file.file, S3_BUCKET, file_id)
+def upload_to_s3(file_path):
+    filename = os.path.basename(file_path)
+    file_id = str(uuid4()) + "_" + filename
+
+    with open(file_path, "rb") as f:
+        s3.upload_fileobj(f, S3_BUCKET, file_id)
+
     return f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{file_id}"

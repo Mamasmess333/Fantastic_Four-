@@ -4,7 +4,6 @@ from sqlalchemy.orm import Session
 from database.connection import get_db
 from services.db_service import save_analysis_result
 from services.s3_service import upload_to_s3
-import boto3
 import os
 
 router = APIRouter(prefix="/upload", tags=["Upload"])
@@ -20,6 +19,9 @@ async def upload_image(
         temp_path = f"temp/{file.filename}"
         with open(temp_path, "wb") as f:
             f.write(await file.read())
+        
+        # Upload to S3 first (before cleaning up temp file)
+        image_url = upload_to_s3(temp_path)
 
         # Run AWS Rekognition analysis
         result = analyze_image(temp_path)
@@ -32,7 +34,7 @@ async def upload_image(
             db=db,
             status=result.get("status", "success"),
             labels=result.get("labels", []),
-            image_url=upload_to_s3(file)
+            image_url=image_url
         )
 
         # If Rekognition returned an error
