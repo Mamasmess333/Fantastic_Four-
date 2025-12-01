@@ -217,28 +217,6 @@ curl -X POST "http://127.0.0.1:8000/upload" \
 
 ---
 
-## 👥 Team Collaboration
-
-- **Main branch**: `main`
-- **Feature branches**: Create branches for new features
-
-**To create a new branch:**
-```bash
-git checkout -b yourname-feature
-```
-
-**To pull updates from main:**
-```bash
-git pull origin main
-```
-
-**To push your branch:**
-```bash
-git push -u origin yourname-feature
-```
-
----
-
 ## 🧪 Testing
 
 Run tests using pytest:
