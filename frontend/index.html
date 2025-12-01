@@ -12,30 +12,61 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      justify-content: flex-start;
+      min-height: 100vh;
       margin: 0;
+      padding-top: 30px;
       text-align: center;
     }
 
     h1 {
       color: #00ff99;
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.4rem;
+      margin-bottom: 0.25rem;
     }
 
-    p {
+    p.subtitle {
       color: #f0f0f0;
       margin-bottom: 1.5rem;
+      font-size: 0.95rem;
     }
 
+    .card {
+      background: #111;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 0 10px rgba(0, 255, 153, 0.15);
+      text-align: left;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: #00ff99;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      margin-top: 6px;
+      margin-bottom: 4px;
+      color: #e0e0e0;
+    }
+
+    input[type="text"],
+    input[type="password"],
     input[type="file"] {
+      width: 100%;
       background: #1a1a1a;
-      border: 2px solid #00ff99;
+      border: 1px solid #00ff99;
       border-radius: 8px;
       color: white;
-      padding: 10px;
-      margin-bottom: 1rem;
+      padding: 8px;
+      font-size: 0.9rem;
+      box-sizing: border-box;
     }
 
     button {
@@ -44,39 +75,67 @@
       font-weight: bold;
       border: none;
       border-radius: 8px;
-      padding: 10px 20px;
+      padding: 8px 16px;
       cursor: pointer;
       transition: 0.2s ease-in-out;
+      margin-top: 10px;
     }
 
     button:hover {
       background-color: #00cc7a;
-      transform: scale(1.05);
+      transform: scale(1.03);
+    }
+
+    #loginStatus {
+      font-size: 0.85rem;
+      margin-top: 6px;
+      color: #cccccc;
     }
 
     pre {
       background: #111;
       color: #00ff99;
-      padding: 20px;
+      padding: 16px;
       border-radius: 10px;
-      width: 80%;
+      width: 90%;
       max-width: 700px;
       overflow-x: auto;
       margin-top: 1.5rem;
       text-align: left;
+      font-size: 0.85rem;
+      box-shadow: 0 0 10px rgba(0, 255, 153, 0.15);
     }
   </style>
 </head>
 <body>
   <h1>BiteWise AI 🍽️</h1>
-  <p>Upload an image of food to analyze it using AWS Rekognition</p>
+  <p class="subtitle">Log in, upload a food image, and see AI-powered analysis.</p>
 
-  <input type="file" id="imageUpload" accept="image/*">
-  <br>
-  <button onclick="uploadImage()">Analyze Image</button>
+  <!-- Demo login (front-end only) -->
+  <div class="card">
+    <h3>Login</h3>
+    <label for="email">Email</label>
+    <input id="email" type="text" placeholder="email@example.com" />
+
+    <label for="password">Password</label>
+    <input id="password" type="password" placeholder="password" />
+
+    <button onclick="login()">Login</button>
+    <p id="loginStatus">Not logged in</p>
+  </div>
+
+  <!-- Upload + scan section -->
+  <div class="card">
+    <h3>Scan Food</h3>
+    <label for="imageUpload">Choose an image (nutrition label or food item)</label>
+    <input type="file" id="imageUpload" accept="image/*" />
+    <button onclick="uploadImage()">Analyze Image</button>
+  </div>
 
   <pre id="result">{ "status": "waiting for image..." }</pre>
 
-  <script src="/static/script.js" defer></script>
+  <!-- Keep this path if FastAPI serves /static/script.js -->
+  <script src="/static/script.js"></script>
 </body>
 </html>
+
