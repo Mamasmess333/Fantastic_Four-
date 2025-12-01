@@ -258,8 +258,8 @@ This project can be deployed on:
 **Backend Architecture & AWS Integration**
 
 - **Project Restructuring**: Created `backend/` folder and reorganized project structure by moving `services/`, `routes/`, and `app.py` into organized directories
-- **Database Integration**: Fixed AWS RDS PostgreSQL connection and implemented database persistence - analyzed data is now successfully saved to the database
-- **Testing & Quality**: Refactored `test_db.py` for improved test coverage and maintainability
+- **Database Integration**: Set up and configured AWS RDS PostgreSQL connection and implemented database persistence - analyzed data is now successfully saved to the database
+- **Testing & Quality**: Built and refactored `test_db.py` for improved test coverage and maintainability
 - **S3 Upload Fix**: Fixed critical bug where empty image files were being saved to S3 - now actual image files are properly uploaded with full content
 - **Code Quality**: Fixed typos in `s3_service.py` and refactored upload logic for better reliability
 - **Environment Configuration**: Updated `.env.example` to include comprehensive database configuration and DATABASE_URL examples
