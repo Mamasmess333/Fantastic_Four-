@@ -275,7 +275,7 @@ This project can be deployed on:
 
 ## 👥 Team Members & Contributions
 
-### Jehun Kim (jkim)
+### Jehun Kim's Contributions (branch: jkim)
 
 **Backend Architecture & AWS Integration**
 
@@ -285,7 +285,7 @@ This project can be deployed on:
 - **S3 Upload Fix**: Fixed critical bug where empty image files were being saved to S3 - now actual image files are properly uploaded with full content
 - **Code Quality**: Fixed typos in `s3_service.py` and refactored upload logic for better reliability
 - **Environment Configuration**: Updated `.env.example` to include comprehensive database configuration and DATABASE_URL examples
-- **AWS Infrastructure**: Set up and configured AWS S3, RDS PostgreSQL, and EC2 instances for production deployment
+- **AWS Infrastructure**: Enhanced and customized the existing AWS setup—including S3, RDS PostgreSQL, and EC2—by modifying configurations and integrations to ensure seamless functionality with the project’s backend services
 
 ---
 
