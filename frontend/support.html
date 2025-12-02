@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BiteWise • Support Hub</title>
+    <link rel="stylesheet" href="/static/assets/style.css" />
+  </head>
+  <body data-page="support">
+    <nav>
+      <div class="nav-inner">
+        <a class="brand" href="/">🍽️ BiteWise</a>
+        <ul>
+          <li><a data-nav="home" href="/">Home</a></li>
+          <li><a data-nav="profile" href="/static/profile.html">Profiles</a></li>
+          <li><a data-nav="analysis" href="/static/analysis.html">Analysis</a></li>
+          <li><a data-nav="plans" href="/static/plans.html">Plans</a></li>
+          <li><a data-nav="search" href="/static/search.html">Search</a></li>
+          <li><a data-nav="support" href="/static/support.html">Support</a></li>
+        </ul>
+        <span class="pill" id="userBadge">Guest session</span>
+      </div>
+    </nav>
+
+    <div class="shell">
+      <div class="grid two">
+        <section class="glass">
+          <p class="pill">Reminders</p>
+          <h2>Schedule notifications</h2>
+          <div class="stack">
+            <label for="notificationMessage">Message</label>
+            <input id="notificationMessage" placeholder="Log lunch photo at noon" />
+          </div>
+          <div class="stack">
+            <label for="notificationDelay">Send in (minutes)</label>
+            <input id="notificationDelay" type="number" value="60" min="5" />
+          </div>
+          <div class="row">
+            <button id="scheduleNotification" type="button">Schedule</button>
+            <button class="secondary" id="loadNotifications" type="button">Refresh list</button>
+          </div>
+          <div class="result-box" id="notificationOutput">{ "status": "idle" }</div>
+        </section>
+
+        <section class="glass">
+          <p class="pill">FAQ + Coach</p>
+          <h2>Answer faster</h2>
+          <div class="stack">
+            <textarea id="chatQuestion" placeholder="Ask about a feature, allergy, or plan"></textarea>
+            <div class="row">
+              <button id="askCoach" type="button">Ask BiteWise Coach</button>
+              <button class="secondary" id="loadFaq" type="button">Load FAQ</button>
+            </div>
+          </div>
+          <div class="result-box" id="chatOutput">{ "status": "idle" }</div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="/static/assets/app.js"></script>
+  </body>
+</html>
+

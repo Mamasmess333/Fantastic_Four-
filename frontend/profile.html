@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BiteWise • Profiles</title>
+    <link rel="stylesheet" href="/static/assets/style.css" />
+  </head>
+  <body data-page="profile">
+    <nav>
+      <div class="nav-inner">
+        <a class="brand" href="/">🍽️ BiteWise</a>
+        <ul>
+          <li><a data-nav="home" href="/">Home</a></li>
+          <li><a data-nav="profile" href="/static/profile.html">Profiles</a></li>
+          <li><a data-nav="analysis" href="/static/analysis.html">Analysis</a></li>
+          <li><a data-nav="plans" href="/static/plans.html">Plans</a></li>
+          <li><a data-nav="search" href="/static/search.html">Search</a></li>
+          <li><a data-nav="support" href="/static/support.html">Support</a></li>
+        </ul>
+        <span class="pill" id="userBadge">Guest session</span>
+      </div>
+    </nav>
+
+    <div class="shell">
+      <div class="grid two">
+        <section class="glass">
+          <p class="pill">Profile</p>
+          <h2>User context</h2>
+          <form class="stack" id="profileForm">
+            <div class="stack">
+              <label for="profileName">Full name</label>
+              <input id="profileName" placeholder="Ada Analyst" required />
+            </div>
+            <div class="stack">
+              <label for="profileEmail">Email</label>
+              <input id="profileEmail" type="email" placeholder="ada@bitewise.app" required />
+            </div>
+            <div class="row">
+              <div class="stack">
+                <label for="profileGoal">Goal</label>
+                <select id="profileGoal">
+                  <option value="health">Health</option>
+                  <option value="fitness">Fitness</option>
+                  <option value="budget">Budget</option>
+                </select>
+              </div>
+              <div class="stack">
+                <label for="profileLanguage">Language</label>
+                <select id="profileLanguage">
+                  <option value="en">English</option>
+                  <option value="es">Spanish</option>
+                  <option value="fr">French</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="stack">
+                <label for="profileBudgetMin">Budget min ($)</label>
+                <input id="profileBudgetMin" type="number" min="0" value="5" />
+              </div>
+              <div class="stack">
+                <label for="profileBudgetMax">Budget max ($)</label>
+                <input id="profileBudgetMax" type="number" min="1" value="15" />
+              </div>
+            </div>
+            <div class="stack">
+              <label for="profilePreferences">Dietary preferences (comma separated)</label>
+              <input id="profilePreferences" placeholder="vegetarian, high-protein" />
+            </div>
+            <div class="stack">
+              <label for="profileAllergies">Allergies (comma separated)</label>
+              <input id="profileAllergies" placeholder="peanuts, dairy" />
+            </div>
+            <button type="submit">Save profile</button>
+            <p class="status" id="profileStatus">No profile saved yet.</p>
+          </form>
+        </section>
+
+        <section class="glass">
+          <p class="pill">History</p>
+          <h2>Latest activity</h2>
+          <button id="loadHistory" type="button">Fetch recent analyses & plans</button>
+          <div class="result-box" id="historyOutput">{ "status": "awaiting user context" }</div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="/static/assets/app.js"></script>
+  </body>
+</html>
+

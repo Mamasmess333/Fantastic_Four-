@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BiteWise • Analysis Lab</title>
+    <link rel="stylesheet" href="/static/assets/style.css" />
+  </head>
+  <body data-page="analysis">
+    <nav>
+      <div class="nav-inner">
+        <a class="brand" href="/">🍽️ BiteWise</a>
+        <ul>
+          <li><a data-nav="home" href="/">Home</a></li>
+          <li><a data-nav="profile" href="/static/profile.html">Profiles</a></li>
+          <li><a data-nav="analysis" href="/static/analysis.html">Analysis</a></li>
+          <li><a data-nav="plans" href="/static/plans.html">Plans</a></li>
+          <li><a data-nav="search" href="/static/search.html">Search</a></li>
+          <li><a data-nav="support" href="/static/support.html">Support</a></li>
+        </ul>
+        <span class="pill" id="userBadge">Guest session</span>
+      </div>
+    </nav>
+
+    <div class="shell">
+      <div class="grid two">
+        <section class="glass">
+          <p class="pill">AI Image Rating</p>
+          <h2>Upload a meal photo</h2>
+          <div class="stack">
+            <input type="file" id="analysisImageUpload" accept="image/*" />
+            <button id="runImageAnalysis" type="button">Upload & score</button>
+          </div>
+          <div class="result-box" id="imageAnalysisOutput">{ "status": "waiting for image" }</div>
+        </section>
+
+        <section class="glass">
+          <p class="pill">Manual ingredients</p>
+          <h2>Paste a label</h2>
+          <div class="stack">
+            <textarea id="analysisIngredients" placeholder="Chicken breast, brown rice, broccoli, sesame oil"></textarea>
+          </div>
+          <div class="row">
+            <div class="stack">
+              <label for="analysisGoal">Goal</label>
+              <select id="analysisGoal">
+                <option value="health">Health</option>
+                <option value="fitness">Fitness</option>
+                <option value="budget">Budget</option>
+              </select>
+            </div>
+            <div class="stack">
+              <label for="analysisBudgetMin">Budget ($)</label>
+              <input id="analysisBudgetMin" type="number" value="5" />
+            </div>
+            <div class="stack">
+              <label for="analysisBudgetMax">Budget max ($)</label>
+              <input id="analysisBudgetMax" type="number" value="15" />
+            </div>
+          </div>
+          <button id="runTextAnalysis" type="button">Analyze text</button>
+          <div class="result-box" id="textAnalysisOutput">{ "status": "idle" }</div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="/static/assets/app.js"></script>
+  </body>
+</html>
+

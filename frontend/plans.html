@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BiteWise • Meal Planner</title>
+    <link rel="stylesheet" href="/static/assets/style.css" />
+  </head>
+  <body data-page="plans">
+    <nav>
+      <div class="nav-inner">
+        <a class="brand" href="/">🍽️ BiteWise</a>
+        <ul>
+          <li><a data-nav="home" href="/">Home</a></li>
+          <li><a data-nav="profile" href="/static/profile.html">Profiles</a></li>
+          <li><a data-nav="analysis" href="/static/analysis.html">Analysis</a></li>
+          <li><a data-nav="plans" href="/static/plans.html">Plans</a></li>
+          <li><a data-nav="search" href="/static/search.html">Search</a></li>
+          <li><a data-nav="support" href="/static/support.html">Support</a></li>
+        </ul>
+        <span class="pill" id="userBadge">Guest session</span>
+      </div>
+    </nav>
+
+    <div class="shell">
+      <section class="glass">
+        <p class="pill">Meal Plan Generator</p>
+        <h2>Curate days in seconds</h2>
+        <div class="grid two">
+          <div class="stack">
+            <label for="planGoal">Goal</label>
+            <select id="planGoal">
+              <option value="health">Health</option>
+              <option value="fitness">Fitness</option>
+              <option value="budget">Budget</option>
+            </select>
+          </div>
+          <div class="stack">
+            <label for="planDays">Days</label>
+            <input id="planDays" type="number" min="1" max="7" value="3" />
+          </div>
+          <div class="stack">
+            <label for="planBudgetMin">Budget min ($)</label>
+            <input id="planBudgetMin" type="number" min="0" value="5" />
+          </div>
+          <div class="stack">
+            <label for="planBudgetMax">Budget max ($)</label>
+            <input id="planBudgetMax" type="number" min="1" value="15" />
+          </div>
+          <div class="stack">
+            <label for="planPreferences">Preferences</label>
+            <input id="planPreferences" placeholder="vegetarian, gluten-free" />
+          </div>
+          <div class="stack">
+            <label for="planAllergies">Allergies</label>
+            <input id="planAllergies" placeholder="nuts, shellfish" />
+          </div>
+        </div>
+        <button id="generatePlan" type="button">Generate plan</button>
+        <div class="result-box" id="planOutput">{ "status": "idle" }</div>
+      </section>
+    </div>
+
+    <script type="module" src="/static/assets/app.js"></script>
+  </body>
+</html>
+

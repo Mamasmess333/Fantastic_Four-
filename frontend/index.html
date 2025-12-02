@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BiteWise • Command Center</title>
+    <link rel="stylesheet" href="/static/assets/style.css" />
+  </head>
+  <body data-page="home">
+    <nav>
+      <div class="nav-inner">
+        <a class="brand" href="/">🍽️ BiteWise</a>
+        <ul>
+          <li><a data-nav="home" href="/">Home</a></li>
+          <li><a data-nav="profile" href="/static/profile.html">Profiles</a></li>
+          <li><a data-nav="analysis" href="/static/analysis.html">Analysis</a></li>
+          <li><a data-nav="plans" href="/static/plans.html">Plans</a></li>
+          <li><a data-nav="search" href="/static/search.html">Search</a></li>
+          <li><a data-nav="support" href="/static/support.html">Support</a></li>
+        </ul>
+        <span class="pill" id="userBadge">Guest session</span>
+      </div>
+    </nav>
+
+    <div class="shell">
+      <section class="hero">
+        <h1>Sleek nutrition intelligence for every bite.</h1>
+        <p>
+          Manage BiteWise user profiles, run AWS-powered meal analysis, generate multi-day plans, explore
+          recommendations, and assist members — each workflow now lives on its own workspace.
+        </p>
+      </section>
+
+      <div class="grid three">
+        <article class="glass">
+          <p class="pill">Profiles</p>
+          <h2>Know your eaters</h2>
+          <p>
+            Capture dietary guardrails, languages, and budgets once. All other modules reuse the active user context for
+            personalization.
+          </p>
+          <a class="pill" href="/static/profile.html">Open profile desk →</a>
+        </article>
+        <article class="glass">
+          <p class="pill">AI Analysis</p>
+          <h2>Photo + text scoring</h2>
+          <p>
+            Upload meals or paste ingredient labels. Rekognition identifies dishes, and our rules engine classifies
+            them as Good / Mid / Bad with next-step suggestions.
+          </p>
+          <a class="pill" href="/static/analysis.html">Open analysis lab →</a>
+        </article>
+        <article class="glass">
+          <p class="pill">Planning</p>
+          <h2>Budget-aware plans</h2>
+          <p>
+            Generate deterministic, goal-based plans from the BiteWise food library. Export daily macros and pricing on
+            demand.
+          </p>
+          <a class="pill" href="/static/plans.html">Open planner →</a>
+        </article>
+      </div>
+
+      <div class="grid two" style="margin-top: 24px">
+        <article class="glass">
+          <p class="pill">Recommendations</p>
+          <h2>Search or snap</h2>
+          <p>
+            Find healthier alternatives via traditional search or drop a plate photo — Rekognition maps detected foods
+            to curated suggestions.
+          </p>
+          <a class="pill" href="/static/search.html">Open discovery →</a>
+        </article>
+        <article class="glass">
+          <p class="pill">Notifications & Support</p>
+          <h2>Remind + answer</h2>
+          <p>
+            Schedule gentle nudges, fetch FAQ, and hand off tough cases to your AWS chatbot. Keep members engaged without
+            leaving the console.
+          </p>
+          <a class="pill" href="/static/support.html">Open support hub →</a>
+        </article>
+      </div>
+    </div>
+
+    <script type="module" src="/static/assets/app.js"></script>
+  </body>
+</html>

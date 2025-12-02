@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BiteWise • Discovery</title>
+    <link rel="stylesheet" href="/static/assets/style.css" />
+  </head>
+  <body data-page="search">
+    <nav>
+      <div class="nav-inner">
+        <a class="brand" href="/">🍽️ BiteWise</a>
+        <ul>
+          <li><a data-nav="home" href="/">Home</a></li>
+          <li><a data-nav="profile" href="/static/profile.html">Profiles</a></li>
+          <li><a data-nav="analysis" href="/static/analysis.html">Analysis</a></li>
+          <li><a data-nav="plans" href="/static/plans.html">Plans</a></li>
+          <li><a data-nav="search" href="/static/search.html">Search</a></li>
+          <li><a data-nav="support" href="/static/support.html">Support</a></li>
+        </ul>
+        <span class="pill" id="userBadge">Guest session</span>
+      </div>
+    </nav>
+
+    <div class="shell">
+      <div class="grid two">
+        <section class="glass">
+          <p class="pill">Text search</p>
+          <h2>Look up foods or products</h2>
+          <div class="stack">
+            <input id="searchQuery" placeholder="chips, oats, smoothie..." />
+            <button id="runSearch" type="button">Search products</button>
+          </div>
+          <div class="result-box" id="searchOutput">{ "status": "idle" }</div>
+        </section>
+
+        <section class="glass">
+          <p class="pill">Image-powered discovery</p>
+          <h2>Let Rekognition find swaps</h2>
+          <div class="stack">
+            <input id="searchImageUpload" type="file" accept="image/*" />
+            <button id="searchFromImage" type="button">Use meal photo</button>
+          </div>
+          <div class="result-box" id="imageSearchOutput">{ "status": "waiting for image" }</div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="/static/assets/app.js"></script>
+  </body>
+</html>
+

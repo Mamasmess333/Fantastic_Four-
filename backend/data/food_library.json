@@ -1,0 +1,69 @@
+[
+  {
+    "name": "Grilled Chicken Bowl",
+    "macros": { "calories": 420, "protein": 36, "carbs": 38, "fat": 12, "fiber": 6, "sugar": 6, "sodium": 510 },
+    "processing_level": "fresh",
+    "additives": [],
+    "alternatives": ["Tofu Power Bowl", "Salmon Grain Bowl"],
+    "tags": ["fitness", "weight-loss", "budget-mid"],
+    "price": 9.5,
+    "ingredients": ["chicken", "brown rice", "spinach", "avocado", "pepper"],
+    "recipes": ["https://bitewise.app/recipes/grilled-chicken-bowl"]
+  },
+  {
+    "name": "Overnight Oats",
+    "macros": { "calories": 360, "protein": 18, "carbs": 52, "fat": 10, "fiber": 9, "sugar": 12, "sodium": 160 },
+    "processing_level": "fresh",
+    "additives": [],
+    "alternatives": ["Chia Pudding Jar", "Greek Yogurt Parfait"],
+    "tags": ["budget-low", "vegetarian", "breakfast"],
+    "price": 3.8,
+    "ingredients": ["oats", "almond milk", "berries", "chia"],
+    "recipes": ["https://bitewise.app/recipes/overnight-oats"]
+  },
+  {
+    "name": "Veggie Lentil Soup",
+    "macros": { "calories": 280, "protein": 16, "carbs": 34, "fat": 8, "fiber": 11, "sugar": 7, "sodium": 420 },
+    "processing_level": "fresh",
+    "additives": [],
+    "alternatives": ["Tomato Basil Soup", "Miso Veggie Soup"],
+    "tags": ["vegan", "budget-low", "immune"],
+    "price": 4.2,
+    "ingredients": ["lentils", "carrot", "celery", "tomato", "spinach"],
+    "recipes": ["https://bitewise.app/recipes/veggie-lentil-soup"]
+  },
+  {
+    "name": "Rainbow Smoothie",
+    "macros": { "calories": 250, "protein": 8, "carbs": 46, "fat": 5, "fiber": 8, "sugar": 26, "sodium": 60 },
+    "processing_level": "fresh",
+    "additives": [],
+    "alternatives": ["Green Detox Smoothie", "Protein Berry Shake"],
+    "tags": ["hydration", "recovery", "budget-low"],
+    "price": 5.0,
+    "ingredients": ["banana", "berries", "spinach", "yogurt", "flax"],
+    "recipes": ["https://bitewise.app/recipes/rainbow-smoothie"]
+  },
+  {
+    "name": "Fried Snack Combo",
+    "macros": { "calories": 640, "protein": 14, "carbs": 58, "fat": 38, "fiber": 3, "sugar": 4, "sodium": 970 },
+    "processing_level": "ultra",
+    "additives": ["TBHQ", "MSG"],
+    "alternatives": ["Air-Fried Chickpeas", "Baked Sweet Potato Fries"],
+    "tags": ["processed", "snack"],
+    "price": 7.0,
+    "ingredients": ["potato", "oil", "salt", "dips"],
+    "recipes": []
+  },
+  {
+    "name": "Soda XL",
+    "macros": { "calories": 220, "protein": 0, "carbs": 54, "fat": 0, "fiber": 0, "sugar": 54, "sodium": 40 },
+    "processing_level": "ultra",
+    "additives": ["Caramel Color", "Aspartame"],
+    "alternatives": ["Sparkling Citrus Water", "Unsweetened Iced Tea"],
+    "tags": ["processed", "high-sugar"],
+    "price": 2.5,
+    "ingredients": ["carbonated water", "corn syrup"],
+    "recipes": []
+  }
+]
+
