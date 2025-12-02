@@ -1,6 +1,31 @@
-const API = "http://127.0.0.1:8000"; // FastAPI backend
+const API_BASE = "http://127.0.0.1:8000";
+
+let loggedInUser = null;
+
+function login() {
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const statusEl = document.getElementById("loginStatus");
+
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
+
+  if (!email || !password) {
+    statusEl.textContent = "Please enter email and password.";
+    return;
+  }
+  loggedInUser = email;
+  statusEl.textContent = `Logged in as ${email}`;
+}
 
 async function uploadImage() {
+  const resultBox = document.getElementById("result");
+
+  if (!loggedInUser) {
+    alert("Please log in first.");
+    return;
+  }
+
   const fileInput = document.getElementById("imageUpload");
   const file = fileInput.files[0];
 
@@ -12,23 +37,25 @@ async function uploadImage() {
   const formData = new FormData();
   formData.append("file", file);
 
-  const resultBox = document.getElementById("result");
   resultBox.textContent = "Analyzing image... ⏳";
 
   try {
-    // Call /upload directly
-    const response = await fetch(`${API}/upload`, {
+    const response = await fetch(`${API_BASE}/upload`, {
       method: "POST",
       body: formData,
     });
 
-    if (!response.ok) throw new Error("Upload or analysis failed");
-    const data = await response.json();
-    console.log("Server response:", data);
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`Server error ${response.status}: ${text}`);
+ }
 
-    // Show the JSON response
+    const data = await response.json();
+
+    // Pretty-print whatever backend returns (status, labels, s3_url, etc.)
     resultBox.textContent = JSON.stringify(data, null, 2);
-  } catch (error) {
-    resultBox.textContent = `❌ Error: ${error.message}`;
+  } catch (err) {
+    resultBox.textContent = `❌ Error: ${err.message}`;
   }
 }
+
