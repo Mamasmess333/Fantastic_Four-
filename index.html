@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BiteWise AI | Smart Nutrition</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0F172A;
+      --card-bg: #1E293B;
+      --accent: #10B981;
+      --accent-hover: #059669;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --danger: #EF4444;
+      --warning: #F59E0B;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* --- Header --- */
+    header {
+      width: 100%;
+      padding: 20px 0;
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .role-badge {
+      background: #334155;
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-left: 15px;
+    }
+
+    /* --- Main Container --- */
+    main {
+      width: 100%;
+      max-width: 600px;
+      padding: 40px 20px;
+      flex: 1;
+    }
+
+    /* --- Logout Button (Header) --- */
+    .logout-btn {
+        position: absolute;
+        right: 20px;
+        background: transparent;
+        border: 1px solid #334155;
+        color: var(--text-muted);
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.8rem;
+    }
+    .logout-btn:hover {
+        border-color: var(--danger);
+        color: var(--danger);
+    }
+
+    /* --- Cards --- */
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid #334155;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    /* --- Form Inputs --- */
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+    label {
+        display: block;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        background: #0F172A;
+        border: 1px solid #334155;
+        color: white;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-family: inherit;
+    }
+    input:focus {
+        outline: none;
+        border-color: var(--accent);
+    }
+
+    /* --- Upload Area --- */
+    .upload-area {
+      border: 2px dashed #334155;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 20px;
+      transition: 0.2s;
+      background: #0F172A;
+    }
+
+    .upload-area:hover {
+      border-color: var(--accent);
+      background: #131d33;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .custom-file-upload {
+      display: inline-block;
+      padding: 10px 20px;
+      cursor: pointer;
+      background: #334155;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    .action-btn {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .action-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* --- Profile Header --- */
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #334155;
+    }
+    .avatar {
+        width: 60px;
+        height: 60px;
+        background: #334155;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+    }
+
+    /* --- Results Section --- */
+    .result-box {
+      margin-top: 30px;
+      border-top: 1px solid #334155;
+      padding-top: 20px;
+    }
+
+    .grade-badge {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .tag-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+
+    .tag {
+        background: #334155;
+        color: #E2E8F0;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .alt-box {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .alt-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    /* --- Admin Table --- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    th {
+      text-align: left;
+      color: var(--text-muted);
+      padding: 12px 8px;
+      border-bottom: 1px solid #334155;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 12px 8px;
+      border-bottom: 1px solid #334155;
+      color: var(--text-main);
+    }
+
+    .raw-table-row {
+        display: flex; 
+        justify-content: space-between; 
+        padding: 6px 0; 
+        border-bottom: 1px solid #334155;
+    }
+
+    /* --- Meal Plan Styles --- */
+    .meal-card {
+        background: #0F172A;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .meal-day {
+        color: var(--accent);
+        font-weight: bold;
+        display: block;
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+    }
+
+    .hidden { display: none; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>BiteWise AI 🍽️ <span id="headerRole" class="role-badge">Guest</span></h1>
+    <button id="logoutBtn" class="logout-btn hidden" onclick="logout()">Sign Out</button>
+  </header>
+
+  <main>
+    
+    <!-- LOGIN SCREEN (Default) -->
+    <div id="loginView" class="card">
+        <div style="text-align:center; margin-bottom:20px;">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🔐</div>
+            <h3>Welcome Back</h3>
+            <p>Please log in to access your nutrition dashboard.</p>
+        </div>
+        
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="emailInput" placeholder="user@example.com">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" value="password123">
+        </div>
+
+        <button class="action-btn" onclick="handleLogin()">Log In</button>
+        
+        <p style="margin-top:20px; font-size:0.8rem; text-align:center; color:#64748B;">
+            <strong>Demo Hint:</strong> Use <em>admin@bitewise.com</em> for Admin View.
+        </p>
+    </div>
+
+    <!-- USER VIEW: SCANNER -->
+    <div id="userView" class="card hidden">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3>Scan Your Meal</h3>
+          <button onclick="showProfile()" style="background:transparent; border:1px solid #334155; color:var(--accent); padding:5px 10px; border-radius:6px; cursor:pointer; font-size:0.85rem;">👤 My Profile</button>
+      </div>
+      <p>Upload a photo of your food. Our AI will analyze nutritional value and suggest budget-friendly alternatives.</p>
+      
+      <div class="upload-area">
+        <div style="font-size: 2rem; margin-bottom: 10px;">📸</div>
+        <div id="fileName" style="color: var(--text-muted);">No file selected</div>
+        <label class="custom-file-upload">
+          <input type="file" id="imageUpload" accept="image/*" onchange="updateFileName()">
+          Choose Image
+        </label>
+      </div>
+
+      <button class="action-btn" onclick="uploadImage()">Analyze Food</button>
+      
+      <!-- Results Display -->
+      <div id="resultContainer" class="hidden result-box">
+        <div style="text-align: center;">
+            <!-- Grade -->
+            <span id="ratingDisplay" class="grade-badge">-</span>
+            
+            <!-- Description -->
+            <div id="reasonDisplay" style="color: var(--text-main); font-size: 1.1rem; font-weight: 500;"></div>
+            
+            <!-- Tags (Raw Data Visualized) -->
+            <div id="tagContainer" class="tag-container">
+                <!-- Tags inserted via JS -->
+            </div>
+            
+            <!-- Mock Confidence Score -->
+            <div style="width: 100%; background: #334155; height: 6px; border-radius: 3px; margin-top: 10px; overflow: hidden;">
+                <div style="width: 88%; background: var(--accent); height: 100%;"></div>
+            </div>
+            <div style="text-align: right; font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">AI Confidence: 88%</div>
+        </div>
+
+        <div class="alt-box">
+            <span class="alt-title">Smart Alternative</span>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span id="altDisplay" style="font-weight: 600;">-</span>
+                <!-- BUDGET FEATURE SIMULATION -->
+                <span style="background:#10B981; color:white; padding:2px 8px; border-radius:4px; font-size:0.75rem;">Save $2.50</span>
+            </div>
+        </div>
+
+        <details style="margin-top: 25px; color: var(--text-muted); font-size: 0.85rem; cursor: pointer;">
+            <summary style="margin-bottom: 10px;">View Technical Details</summary>
+            <div id="rawResult" style="background: #0F172A; padding: 15px; border-radius: 8px;"></div>
+        </details>
+      </div>
+    </div>
+
+    <!-- USER VIEW: PROFILE & MEAL PLAN -->
+    <div id="userProfileView" class="card hidden">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <button onclick="hideProfile()" style="background:transparent; border:none; color:var(--text-muted); cursor:pointer;">← Back to Scanner</button>
+        </div>
+
+        <div class="profile-header">
+            <div class="avatar">👤</div>
+            <div>
+                <h2 style="margin:0; font-size:1.2rem;" id="profileEmail">user@example.com</h2>
+                <span style="color:var(--accent); font-size:0.85rem;">Budget Goal: $50/week</span>
+            </div>
+        </div>
+
+        <!-- MEAL PLAN GENERATOR (Simulated) -->
+        <div style="margin-bottom: 30px; border-bottom:1px solid #334155; padding-bottom:20px;">
+            <h3>Weekly Meal Plan</h3>
+            <p style="font-size:0.85rem;">Generated based on your recent scans and budget.</p>
+            <button id="genMealBtn" class="action-btn" style="padding:10px; font-size:0.9rem;" onclick="generateMealPlan()">✨ Generate New Plan</button>
+            
+            <div id="mealPlanContainer" class="hidden" style="margin-top:15px;">
+                <div class="meal-card">
+                    <div>
+                        <span class="meal-day">MONDAY</span>
+                        <span>Grilled Chicken Salad</span>
+                    </div>
+                    <span style="color:#10B981;">$4.50</span>
+                </div>
+                <div class="meal-card">
+                    <div>
+                        <span class="meal-day">TUESDAY</span>
+                        <span>Turkey Burger (Homemade)</span>
+                    </div>
+                    <span style="color:#10B981;">$3.20</span>
+                </div>
+                <div class="meal-card">
+                    <div>
+                        <span class="meal-day">WEDNESDAY</span>
+                        <span>Vegetable Stir Fry</span>
+                    </div>
+                    <span style="color:#10B981;">$2.80</span>
+                </div>
+            </div>
+        </div>
+
+        <h3>My Activity Log</h3>
+        <table id="profileHistoryTable">
+            <thead>
+                <tr>
+                    <th>Grade</th>
+                    <th>Item</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="profileHistoryBody"></tbody>
+        </table>
+    </div>
+
+    <!-- ADMIN VIEW -->
+    <div id="adminView" class="card hidden">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px;">
+        <h3>Database Records</h3>
+        <!-- USER FILTER -->
+        <div style="display:flex; gap:10px;">
+            <select id="adminUserFilter" onchange="renderAdminTable()" style="background:#0F172A; color:white; border:1px solid #334155; padding:5px; border-radius:6px; cursor:pointer;">
+                <option value="all">All Users</option>
+            </select>
+            <button onclick="fetchHistory()" style="background:transparent; border:1px solid #334155; color:var(--text-main); padding:5px 10px; border-radius:6px; cursor:pointer;">Refresh</button>
+        </div>
+      </div>
+      <p>Real-time view of the <code>analysis_results</code> table (PostgreSQL/SQLite).</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Grade</th>
+            <th>Item</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="dbBody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    const API = "http://127.0.0.1:8000";
+    let currentUserEmail = "";
+    let adminDataCache = []; // Store fetched admin data to allow filtering
+
+    function updateFileName() {
+        const input = document.getElementById('imageUpload');
+        const fileName = document.getElementById('fileName');
+        if (input.files.length > 0) {
+            fileName.textContent = input.files[0].name;
+            fileName.style.color = "#10B981";
+        }
+    }
+
+    function handleLogin() {
+        const email = document.getElementById('emailInput').value.toLowerCase();
+        currentUserEmail = email || "user@example.com";
+        
+        // Hide Login, Show Header Logout
+        document.getElementById('loginView').classList.add('hidden');
+        document.getElementById('logoutBtn').classList.remove('hidden');
+
+        if (email.includes('admin')) {
+            document.getElementById('adminView').classList.remove('hidden');
+            document.getElementById('headerRole').textContent = "Admin";
+            fetchHistory();
+        } else {
+            document.getElementById('userView').classList.remove('hidden');
+            document.getElementById('headerRole').textContent = "User";
+            document.getElementById('profileEmail').textContent = currentUserEmail;
+        }
+    }
+
+    function logout() {
+        document.getElementById('userView').classList.add('hidden');
+        document.getElementById('userProfileView').classList.add('hidden');
+        document.getElementById('adminView').classList.add('hidden');
+        document.getElementById('loginView').classList.remove('hidden');
+        document.getElementById('logoutBtn').classList.add('hidden');
+        document.getElementById('headerRole').textContent = "Guest";
+        document.getElementById('emailInput').value = "";
+    }
+
+    function showProfile() {
+        document.getElementById('userView').classList.add('hidden');
+        document.getElementById('userProfileView').classList.remove('hidden');
+        fetchProfileHistory();
+    }
+
+    function hideProfile() {
+        document.getElementById('userProfileView').classList.add('hidden');
+        document.getElementById('userView').classList.remove('hidden');
+    }
+
+    function generateMealPlan() {
+        const btn = document.getElementById('genMealBtn');
+        btn.textContent = "Generating...";
+        setTimeout(() => {
+            btn.textContent = "Refreshed!";
+            document.getElementById('mealPlanContainer').classList.remove('hidden');
+        }, 800);
+    }
+
+    async function uploadImage() {
+      const fileInput = document.getElementById("imageUpload");
+      const resultContainer = document.getElementById("resultContainer");
+      
+      if (!fileInput.files[0]) return alert("Please select an image first.");
+      
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+      
+      resultContainer.classList.remove("hidden");
+      document.getElementById("ratingDisplay").textContent = "⏳";
+      document.getElementById("reasonDisplay").textContent = "Analyzing...";
+      document.getElementById("tagContainer").innerHTML = "";
+      document.getElementById("altDisplay").textContent = "...";
+      
+      try {
+        const res = await fetch(`${API}/upload`, { method: "POST", body: formData });
+        const data = await res.json();
+        
+        const rating = data.rating || "Unknown";
+        const ratingEl = document.getElementById("ratingDisplay");
+        ratingEl.textContent = rating;
+        
+        if (rating === 'A' || rating === 'A+') ratingEl.style.color = "#10B981"; 
+        else if (rating === 'B' || rating === 'C') ratingEl.style.color = "#F59E0B"; 
+        else ratingEl.style.color = "#EF4444"; 
+
+        document.getElementById("reasonDisplay").textContent = data.reason || "Analysis complete.";
+        
+        const tagContainer = document.getElementById("tagContainer");
+        tagContainer.innerHTML = "";
+        if (data.labels && Array.isArray(data.labels)) {
+            data.labels.slice(0, 5).forEach(label => {
+                const tag = document.createElement("span");
+                tag.className = "tag";
+                tag.textContent = label;
+                tagContainer.appendChild(tag);
+            });
+        }
+
+        const altText = data.alternative || "None";
+        document.getElementById("altDisplay").textContent = altText;
+
+        let techHtml = "";
+        for (const [key, value] of Object.entries(data)) {
+            if (key !== 'labels') {
+                techHtml += `<div class="raw-table-row">
+                    <span style="color:#94A3B8; text-transform:capitalize;">${key}</span>
+                    <span style="color:#F8FAFC;">${value}</span>
+                </div>`;
+            }
+        }
+        document.getElementById("rawResult").innerHTML = techHtml;
+        
+      } catch (e) {
+        document.getElementById("ratingDisplay").textContent = "!";
+        document.getElementById("reasonDisplay").textContent = "Connection Error. Is Backend running?";
+      }
+    }
+
+    async function fetchHistory() {
+      try {
+        const res = await fetch(`${API}/admin/scans`);
+        const rawData = await res.json();
+        
+        // Process data ONCE and store in cache
+        adminDataCache = rawData.map(row => {
+            let rating = "N/A";
+            let labels = "Unknown";
+            
+            if (row.labels && row.labels.rating) {
+                rating = row.labels.rating;
+                labels = row.labels.detected ? row.labels.detected[0] : "Unknown";
+            }
+            
+            // Assign users consistently based on ID
+            const randomUser = row.id % 2 === 0 ? "user@example.com" : "john.doe@gmail.com";
+            
+            return {
+                ...row,
+                simulatedUser: randomUser,
+                uiRating: rating,
+                uiLabels: labels,
+                uiDate: new Date(row.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+            };
+        });
+
+        // 1. Populate Dropdown Options
+        const uniqueUsers = [...new Set(adminDataCache.map(r => r.simulatedUser))];
+        const select = document.getElementById('adminUserFilter');
+        const currentVal = select.value;
+        
+        select.innerHTML = '<option value="all">All Users</option>';
+        uniqueUsers.forEach(u => {
+            const opt = document.createElement('option');
+            opt.value = u;
+            opt.textContent = u;
+            select.appendChild(opt);
+        });
+        
+        // Restore previous selection if valid
+        if (uniqueUsers.includes(currentVal)) select.value = currentVal;
+
+        // 2. Render Table
+        renderAdminTable();
+
+      } catch (e) {
+        document.getElementById("dbBody").innerHTML = "<tr><td colspan='5' style='text-align:center; color:#EF4444;'>Error fetching data. Backend offline?</td></tr>";
+      }
+    }
+
+    function renderAdminTable() {
+        const filterVal = document.getElementById('adminUserFilter').value;
+        const tbody = document.getElementById("dbBody");
+        tbody.innerHTML = "";
+
+        const filtered = filterVal === 'all' 
+            ? adminDataCache 
+            : adminDataCache.filter(row => row.simulatedUser === filterVal);
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = "<tr><td colspan='5' style='text-align:center; color:#94A3B8;'>No records found.</td></tr>";
+            return;
+        }
+
+        filtered.forEach(row => {
+            let badgeColor = "#94A3B8";
+            if(row.uiRating.includes('A')) badgeColor = "#10B981";
+            if(row.uiRating.includes('D') || row.uiRating.includes('F')) badgeColor = "#EF4444";
+
+            const tr = `<tr>
+              <td>#${row.id}</td>
+              <td style="color:#94A3B8;">${row.simulatedUser}</td>
+              <td><span style="color:${badgeColor}; font-weight:800;">${row.uiRating}</span></td>
+              <td>${row.uiLabels}</td>
+              <td style="color:#94A3B8;">${row.uiDate}</td>
+            </tr>`;
+            tbody.innerHTML += tr;
+        });
+    }
+
+    async function fetchProfileHistory() {
+      try {
+        const res = await fetch(`${API}/admin/scans`);
+        const data = await res.json();
+        const tbody = document.getElementById("profileHistoryBody");
+        tbody.innerHTML = "";
+        
+        data.slice(0, 5).forEach(row => {
+            let rating = "N/A";
+            let labels = "Unknown";
+            
+            if (row.labels && row.labels.rating) {
+                rating = row.labels.rating;
+                labels = row.labels.detected ? row.labels.detected[0] : "Unknown";
+            }
+
+            let badgeColor = "#94A3B8";
+            if(rating.includes('A')) badgeColor = "#10B981";
+            if(rating.includes('D') || rating.includes('F')) badgeColor = "#EF4444";
+
+            const tr = `<tr>
+              <td><span style="color:${badgeColor}; font-weight:800;">${rating}</span></td>
+              <td>${labels}</td>
+              <td style="color:#94A3B8;">${new Date(row.created_at).toLocaleDateString()}</td>
+            </tr>`;
+            tbody.innerHTML += tr;
+        });
+      } catch (e) {
+        console.log("Error loading profile history");
+      }
+    }
+  </script>
+</body>
+</html>
