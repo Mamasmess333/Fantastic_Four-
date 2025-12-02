@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from dotenv import load_dotenv
-from routes import upload, analysis
+from routes import upload, analysis, auth
 from services import ai_service, db_service, s3_service
 import os
 
@@ -41,5 +41,6 @@ def serve_index():
 
 
 # === API Routes ===
+app.include_router(auth.router)
 app.include_router(upload.router)
 app.include_router(analysis.router)
