@@ -4,3 +4,6 @@ boto3
 python-dotenv
 sqlalchemy
 psycopg2-binary
+passlib[bcrypt]
+python-jose[cryptography]
+python-multipart

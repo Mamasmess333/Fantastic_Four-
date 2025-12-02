@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BiteWise AI - Login 🍽️</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #00ff99;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    .container {
+      background: #1a1a1a;
+      border: 2px solid #00ff99;
+      border-radius: 15px;
+      padding: 40px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
+    }
+
+    h1 {
+      color: #00ff99;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tab-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+    }
+
+    .tab {
+      background: transparent;
+      color: #888;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .tab.active {
+      color: #00ff99;
+      border-bottom-color: #00ff99;
+    }
+
+    .form-container {
+      display: none;
+    }
+
+    .form-container.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      color: #f0f0f0;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      background: #0d0d0d;
+      border: 2px solid #00ff99;
+      border-radius: 8px;
+      color: white;
+      padding: 12px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #00cc7a;
+      box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+    }
+
+    button {
+      background-color: #00ff99;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+      width: 100%;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: #00cc7a;
+      transform: scale(1.02);
+    }
+
+    button:disabled {
+      background-color: #666;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .message {
+      margin-top: 1rem;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .message.success {
+      background: rgba(0, 255, 153, 0.1);
+      border: 1px solid #00ff99;
+      color: #00ff99;
+      display: block;
+    }
+
+    .message.error {
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid #ff0033;
+      color: #ff0033;
+      display: block;
+    }
+
+    .link {
+      color: #00ff99;
+      text-decoration: none;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BiteWise AI 🍽️</h1>
+
+    <div class="tab-container">
+      <button class="tab active" onclick="switchTab('login')">Login</button>
+      <button class="tab" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm" class="form-container active">
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginUsername">Username</label>
+          <input type="text" id="loginUsername" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <div id="loginMessage" class="message"></div>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerForm" class="form-container">
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label for="registerUsername">Username</label>
+          <input type="text" id="registerUsername" required />
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" required />
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Password</label>
+          <input type="password" id="registerPassword" required minlength="6" />
+        </div>
+        <button type="submit">Register</button>
+      </form>
+      <div id="registerMessage" class="message"></div>
+    </div>
+
+    <a href="/static/index.html" class="link">Back to Home</a>
+  </div>
+
+  <script src="/static/login.js" defer></script>
+</body>
+</html>

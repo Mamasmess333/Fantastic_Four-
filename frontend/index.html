@@ -65,9 +65,36 @@
       margin-top: 1.5rem;
       text-align: left;
     }
+
+    .header-nav {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .login-btn {
+      background-color: transparent;
+      color: #00ff99;
+      border: 2px solid #00ff99;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s ease-in-out;
+      display: inline-block;
+    }
+
+    .login-btn:hover {
+      background-color: #00ff99;
+      color: #000;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
+  <div class="header-nav">
+    <a href="/static/login.html" class="login-btn" id="authButton">Login</a>
+  </div>
+
   <h1>BiteWise AI 🍽️</h1>
   <p>Upload an image of food to analyze it using AWS Rekognition</p>
 
@@ -78,5 +105,32 @@
   <pre id="result">{ "status": "waiting for image..." }</pre>
 
   <script src="/static/script.js" defer></script>
+  <script>
+    // Check if user is logged in and update the auth button
+    window.addEventListener('DOMContentLoaded', async () => {
+      const token = localStorage.getItem('access_token');
+      const authButton = document.getElementById('authButton');
+
+      if (token) {
+        try {
+          const response = await fetch('/auth/me', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          if (response.ok) {
+            const user = await response.json();
+            authButton.textContent = user.username;
+            authButton.href = '/static/profile.html';
+          } else {
+            localStorage.removeItem('access_token');
+          }
+        } catch (error) {
+          localStorage.removeItem('access_token');
+        }
+      }
+    });
+  </script>
 </body>
 </html>
