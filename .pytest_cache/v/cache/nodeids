@@ -1,0 +1,4 @@
+[
+  "test/test_analysis_route.py::test_missing_image_url",
+  "test/test_analysis_route.py::test_valid_image_url"
+]
